@@ -1,0 +1,48 @@
+@import '../../common/color';
+.contentDiv{
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  z-index: 1;
+  //border: 1px solid white;
+  color: $secondary-color;
+}
+.contentPro {
+  position: relative;
+  width: 1200px;
+  margin: auto;
+  border: 1px solid white;
+  top: 50px;
+}
+
+.partProfile {
+  position: relative;
+  left: 50%;
+  top: 400px;
+  width: 600px;
+  height: 800px;
+  transform: translate(-50%, -50%);
+  background-color: $font-secondary;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px $primary-color;
+  &
+  form{
+    margin-left: 5px;
+  }
+}
+
+.edit {
+  position: absolute;
+  top: 5px;
+  left: 230px;
+  width: 120px;
+}
+
+
+.send {
+  position: absolute;
+  z-index: -1;
+  top: 700px;
+  left: 450px;
+  width: 120px;
+}

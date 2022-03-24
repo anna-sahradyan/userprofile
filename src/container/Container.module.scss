@@ -1,0 +1,77 @@
+@import '../common/color';
+.contentDiv{
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  z-index: 1;
+  //border: 1px solid white;
+  color: $secondary-color;
+
+}
+.content{
+  position: relative;
+  width: 1200px;
+  margin: auto;
+  min-height: 100vh;
+  border: 1px solid white;
+
+  ul {
+    list-style-type: none;
+
+    &
+    b {
+      margin-left: 5px;
+    }
+  }
+  }
+//profileList
+
+.partUsers {
+  position: relative;
+  left: 50%;
+  top: 500px;
+  width: 600px;
+  height: 1000px;
+  transform: translate(-50%, -50%);
+  background-color: $font-secondary;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px $primary-color;
+
+  &
+  p {
+    position: absolute;
+    bottom: -15px;
+    left: 370px;
+    z-index: 2;
+    font-weight: 500;
+  }
+  button {
+    position: absolute;
+    margin-left: 330px;
+    margin-top: -40px;
+
+
+  }
+}
+
+//Users js
+.card {
+  position: relative;
+  top: 100px;
+  width: 500px;
+  height: 80px;
+
+  &
+  li {
+    background-color: $secondary-color;
+    color: black;
+
+    span {
+      display: block;
+      position: absolute;
+      margin-left: 90px;
+      margin-top: -25px;
+    }
+
+  }
+}
