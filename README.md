@@ -1,6 +1,6 @@
 ## ``Current...``
 
-## Open https://userprofile-3cd78.firebaseapp.com/to view it in the browser.
+## Open  https://userprofile-3cd78.firebaseapp.com/  to view it in the browser.
 
 
 
