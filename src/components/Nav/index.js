@@ -9,8 +9,6 @@ const Nav = () => {
             <nav className={s.nav}>
             <ul>
                 <NavLink to={'/'}><li>Home</li></NavLink>
-               <NavLink to={'/userprofile/:id'} ><li>UserProfile</li></NavLink>
-
 
             </ul>
             </nav>

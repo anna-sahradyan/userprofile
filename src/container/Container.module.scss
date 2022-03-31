@@ -13,7 +13,7 @@
   width: 1200px;
   margin: auto;
   min-height: 100vh;
-  border: 1px solid white;
+  //border: 1px solid white;
 
   ul {
     list-style-type: none;
@@ -24,6 +24,10 @@
     }
   }
   }
+.statusPage{
+  position: absolute;
+  transform: translate(10%, -50%);
+}
 //profileList
 
 .partUsers {
@@ -57,14 +61,17 @@
 //Users js
 .card {
   position: relative;
-  top: 100px;
+  left: 30px;
+  top: 50px;
   width: 500px;
   height: 80px;
+
 
   &
   li {
     background-color: $secondary-color;
     color: black;
+
 
     span {
       display: block;
@@ -74,4 +81,11 @@
     }
 
   }
+}
+.send {
+  position: absolute;
+  z-index: -1;
+  top: 700px;
+  left: 450px;
+  width: 120px;
 }

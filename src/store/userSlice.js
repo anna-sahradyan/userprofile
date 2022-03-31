@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import axios from "axios";
+
 //getUser
 export const fetchAsyncGetUsers = createAsyncThunk('user/fetchAsyncUsers', async function (_, {rejectWithValue}) {
     try {
@@ -15,11 +15,27 @@ export const fetchAsyncGetUsers = createAsyncThunk('user/fetchAsyncUsers', async
     }
 
 })
-//create
-export const fetchAsyncCreate = createAsyncThunk('user/fetchAsyncCreate', async function ({values}, {rejectWithValue}) {
+//idPage
+export const fetchAsyncUsersId = createAsyncThunk('user/fetchAsyncUsersId', async function (id, {rejectWithValue}) {
     try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users`, {
-            method: 'POST', headers: {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+        if (!response.ok) {
+            throw new Error('Server Error!');
+        }
+        const data = await response.json();
+        console.log(data)
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+
+});
+//update
+
+export const fetchAsyncUpdate = createAsyncThunk('user/fetchAsyncUpdate', async function ({id,values}, {rejectWithValue}) {
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+            method: 'PUT', headers: {
                 Accept: 'application/json', "Content-Type": 'application/json'
             }, body: JSON.stringify({
                 name: values.name,
@@ -38,20 +54,6 @@ export const fetchAsyncCreate = createAsyncThunk('user/fetchAsyncCreate', async 
             throw new Error('Server Error!');
         }
         const data = await response.json();
-        return data;
-    } catch (error) {
-        return rejectWithValue(error.message);
-    }
-
-});
-//idPage
-export const fetchAsyncUsersId = createAsyncThunk('user/fetchAsyncUsersId', async function (id, {rejectWithValue}) {
-    try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-        if (!response.ok) {
-            throw new Error('Server Error!');
-        }
-        const data = await response.json();
         console.log(data)
         return data;
     } catch (error) {
@@ -59,49 +61,6 @@ export const fetchAsyncUsersId = createAsyncThunk('user/fetchAsyncUsersId', asyn
     }
 
 });
-
-//update
-export const fetchAsyncUpdate = createAsyncThunk('user/ fetchAsyncUpdate', async function ({
-                                                                                               id,
-                                                                                               name,
-                                                                                               username,
-                                                                                               email,
-                                                                                               street,
-                                                                                               city,
-                                                                                               zipcode,
-                                                                                               phone,
-                                                                                               website
-                                                                                           }, {
-                                                                                               rejectWithValue,
-                                                                                               getState,
-                                                                                               dispatch
-                                                                                           }) {
-
-    try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
-            method: 'PUT',
-            headers: {
-                Accept: 'application/json', "Content-Type": 'application/json'
-            },
-
-            body: JSON.stringify({name, username, email, street, city, zipcode, phone, website})
-
-        });
-        if (!response.ok) {
-            throw new Error('Server Error!');
-        }
-        const data = await response.json();
-        dispatch(setEdit({id}))
-        console.log(response.data)
-        return data;
-    } catch (error) {
-        return rejectWithValue(error.message);
-    }
-
-})
-// export const fetchAsyncUpdate = async (id,name,username,email,zipcode,city,street,website,phone)=>{
-//   return await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`,name,username,email,zipcode,city,street,website,phone)
-// }
 const setError = (state, action) => {
     state.status = 'rejected';
     state.error = action.payload;
@@ -123,6 +82,7 @@ const userSlice = createSlice({
         website: "",
     }, reducers: {
         setEdit: (state, action) => {
+            state.edit = action.payload.edit;
             state.name = action.payload.name;
             state.username = action.payload.username;
             state.email = action.payload.email;
@@ -131,7 +91,7 @@ const userSlice = createSlice({
             state.website = action.payload.website;
             state.city = action.payload.city;
             state.street = action.payload.street;
-            state.edit = action.payload.edit;
+
         }
 
     }, extraReducers: {
@@ -142,13 +102,15 @@ const userSlice = createSlice({
             state.status = 'resolved';
             state.user = action.payload;
         },
-        [fetchAsyncCreate.pending]: (state) => {
+
+        [fetchAsyncUpdate.pending]: (state) => {
             state.status = 'loading'
         },
-        [fetchAsyncCreate.fulfilled]: (state, action) => {
+        [fetchAsyncUpdate.fulfilled]: (state, action) => {
             state.status = 'resolved';
             state.user = action.payload;
         },
+
         [fetchAsyncUsersId.pending]: (state) => {
             state.status = 'loading'
         },
@@ -158,17 +120,12 @@ const userSlice = createSlice({
 
 
         },
-        [fetchAsyncUpdate.pending]: (state) => {
-            state.status = 'loading'
-        },
-        [fetchAsyncUpdate.fulfilled]: (state, action) => {
-            state.status = 'resolved';
-            console.log(state.user = [action.payload]);
-        },
+
         [fetchAsyncGetUsers.rejected]: setError,
-        [fetchAsyncCreate.rejected]: setError,
-        [fetchAsyncUsersId.rejected]: setError,
         [fetchAsyncUpdate.rejected]: setError,
+        [fetchAsyncUsersId.rejected]: setError,
+
+
     }
 });
 export const {setEdit} = userSlice.actions;

@@ -24,9 +24,8 @@ const Users = (props) => {
                 <li><b>Name:</b><span>{props.name}</span></li>
                 <li><b>City:</b><span>{props.city}</span></li>
                 <li><b>Company:</b><span>{props.company}</span></li>
-                <Stack spacing={2} direction="row">
-                    <NavLink to={`/userprofile/${props.id}`}><ColorButton variant="contained">Custom
-                        CSS</ColorButton></NavLink>
+                <Stack spacing={3} direction="row">
+                    <NavLink to={`/userprofile/${props.id}`}><ColorButton variant="contained"> see profile</ColorButton></NavLink>
 
                 </Stack>
 

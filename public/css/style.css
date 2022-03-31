@@ -27,9 +27,6 @@ html{
     position: relative;
     display: grid;
     margin: auto;
-    /*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);*/
-    /*border-radius: 10px;*/
-    /*background-color: red;*/
     min-height:100%;
     grid-template-rows:minmax(70px, auto)1fr;
     grid-template-areas:
@@ -50,12 +47,3 @@ html{
 
 
 }
-/*
-.todo{
-position:absalute;
-left 50%;
-top50%;
-width:750px;
-height:530px;
-transform:translate(-50%,-50%);
-*/

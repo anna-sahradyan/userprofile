@@ -4,6 +4,7 @@ import {Button} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAsyncGetUsers, selectUsers} from "../store/userSlice";
 import Users from '../components/userDumb/Users'
+import Loading from "../components/loading";
 
 const ProfileList = () => {
     const {status, error} = useSelector(state => state.user);
@@ -27,7 +28,7 @@ const ProfileList = () => {
         setSortUser(sortData)
         setFlag(true);
 
-        console.log(sortData)
+
     }
 
 
@@ -47,8 +48,8 @@ const ProfileList = () => {
                     </Button>
                     <div className={s.partUsers}>
                         <div className={s.statusPage}>
-                            {/*{status === 'loading' && <h2>Loading<b>....</b></h2>}*/}
-                            {/*{error && <h2>An Error occurred:{error}</h2>}*/}
+                         {status === 'loading' && <h2><Loading/></h2>}
+                            {error && <h2>An Error occurred:{error}</h2>}
                         </div>
                         <div className={s.card}>
                             {(flag ? sortUser.map((item, index) => <Users key={`${item}_${index}`} name={item.name}
@@ -57,7 +58,7 @@ const ProfileList = () => {
                             />) : (users.map((item, index) => <Users key={`${item}_${index}`} name={item.name}
                                                                      city={item.address['city']}
                                                                      company={item.company['name']} id={item.id}
-                            />)))}
+                                                                   />)))}
 
                         </div>
                         <p>Ten user found:{users.length}</p>
